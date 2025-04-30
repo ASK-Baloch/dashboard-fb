@@ -1,16 +1,14 @@
-import { connect } from '@/lib/mongoose';
-import Post from '@/models/Post';
-import axios from 'axios';
+import mongoose from 'mongoose';
 
-export async function GET() {
-  await connect();
-  const due = await Post.find({ scheduleAt: { $lte: new Date() }, posted: false });
-  for (const doc of due) {
-    await publish(doc);
-  }
-  return new Response('OK');
-}
+const PostSchema = new mongoose.Schema({
+  userId: String,
+  groups: [String],
+  caption: String,
+  comment: String,
+  link: String,
+  imageUrl: String,
+  scheduleAt: Date,
+  posted: Boolean
+});
 
-async function publish(doc) {
-  // similar to publishPost above
-}
+export default mongoose.models.Post || mongoose.model('Post', PostSchema);

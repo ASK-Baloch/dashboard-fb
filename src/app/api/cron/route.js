@@ -12,5 +12,18 @@ export async function GET() {
 }
 
 async function publish(doc) {
-  // similar to publishPost above
+    for (const groupId of doc.groups) {
+        const url = `https://graph.facebook.com/${groupId}/feed`;
+        await axios.post(url, {
+          message: doc.caption,
+          link: doc.link,
+          access_token: token
+        });
+        if (doc.comment) {
+          // Comment on the post
+          // Handle retrieving post ID if needed
+        }
+      }
+      doc.posted = true;
+      await doc.save();
 }
