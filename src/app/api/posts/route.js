@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { connect } from '@/lib/mongoose';
 import { getSession } from 'next-auth/react';
 import Post from '@/models/Post';

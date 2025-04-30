@@ -11,4 +11,6 @@ const PostSchema = new mongoose.Schema({
   posted: Boolean
 });
 
-export default mongoose.models.Post || mongoose.model('Post', PostSchema);
+const Post = mongoose.models.Post || mongoose.model('Post', PostSchema);
+
+export default Post;
